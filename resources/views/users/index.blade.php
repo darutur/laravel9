@@ -9,17 +9,19 @@
     </h1>
 
     <form action="{{ route('users.index') }}" method="get">
-        <input type="text" name="search" placeholder="Pesquisar">
-        <button type="submit">Pesquisar</button>
+        <input type="text" name="search" placeholder="Pesquisar" value="{{ old('search') }}">
+        <button>Pesquisar</button>
     </form>
 
     <ul>
         @foreach ($users as $user)
             <li>
                 {{ $user->name }} -
-                {{ $user->email }}
+                {{ $user->email }} -
+                Anotações (0)
                 | <a href="{{ route('users.edit', $user->id) }}">Editar</a>
                 | <a href="{{ route('users.show', $user->id) }}">Detalhes</a>
+                | <a href="{{ route('comments.index', $user->id) }}">Commentários</a>
             </li>
         @endforeach
     </ul>
