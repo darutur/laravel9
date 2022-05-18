@@ -18,11 +18,16 @@
             <li>
                 {{ $user->name }} -
                 {{ $user->email }} -
-                Anotações (0)
+                Anotações ({{ $user->comments->count() }})
                 | <a href="{{ route('users.edit', $user->id) }}">Editar</a>
                 | <a href="{{ route('users.show', $user->id) }}">Detalhes</a>
                 | <a href="{{ route('comments.index', $user->id) }}">Commentários</a>
             </li>
         @endforeach
     </ul>
+    <div>
+        {{ $users->appends([
+                'search' => request()->get('search', ''),
+            ])->links() }}
+    </div>
 @endsection
